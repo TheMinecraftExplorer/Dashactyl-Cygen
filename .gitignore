@@ -8,6 +8,7 @@ __pycache__/
 
 #personal shit
 test shit/
+.idea/
 
 # Distribution / packaging
 .Python
