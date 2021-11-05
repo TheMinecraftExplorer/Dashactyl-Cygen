@@ -125,7 +125,7 @@ async def get_allocation_id():
 
         # checks if there is any unused allocations in the current page, if not it goes to a new page
         if len(filtered_list) != 0:
-            allocation_id = filtered_list[1]
+            allocation_id = filtered_list[0]
             return allocation_id['attributes']['id']
         else:
             # Tries to find a new page to send a request to, if not then all allocations are declared as full

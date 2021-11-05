@@ -19,7 +19,8 @@ class Servers(commands.Cog):
         global type_server
         config = loadf('./config.json')
         if config['server_creation'] is False:
-            await ctx.send('Server creations is disabled currently. Please wait for it to be enabled by an administrator. Opening a ticket regarding this will result in a warn :smile:')
+            await ctx.send(
+                'Server creations is disabled currently. Please wait for it to be enabled by an administrator. Opening a ticket regarding this will result in a warn :smile:')
         else:
             server_price = config['server_price']
             if server_name is None:
@@ -101,13 +102,16 @@ class Servers(commands.Cog):
 
                         final_message = await ctx.send('Searching for allocations.')
                         allocation_id = await get_allocation_id()
-                        await final_message.edit(content='Allocation found successfully, attempting to create a server.',
-                                                 embed=None)
-                        server = await create_ptero_server(name=server_name, user_id=user_id, allocation_id=allocation_id,
+                        await final_message.edit(
+                            content='Allocation found successfully, attempting to create a server.',
+                            embed=None)
+                        server = await create_ptero_server(name=server_name, user_id=user_id,
+                                                           allocation_id=allocation_id,
                                                            type_server=type_server)
                         if int(server) == 201:
-                            await final_message.edit(content=f'Attempting to remove `{server_price}` coins from your account.',
-                                                     embed=None)
+                            await final_message.edit(
+                                content=f'Attempting to remove `{server_price}` coins from your account.',
+                                embed=None)
                             coins_left = initial_coins - server_price
                             await set_coins(coins=coins_left, discord_id=ctx.author.id)
                             successful_embed = discord.Embed(title='Success!',
@@ -128,6 +132,11 @@ class Servers(commands.Cog):
                         coins_needed_embed.set_footer(text='CygenNodes',
                                                       icon_url='https://media.discordapp.net/attachments/801034454155395082/890871710717448202/cygen_logo.png')
                         await message.edit(embed=coins_needed_embed, content=None)
+
+    @commands.command()
+    @commands.cooldown(1, 60, commands.BucketType.user)
+    async def change_egg(self, ctx):
+        pass
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):

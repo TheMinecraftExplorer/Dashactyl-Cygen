@@ -23,7 +23,7 @@ async def status_task():
         activity3 = discord.Activity(name=".create_server <name> to create a server in Singapore",
                                      type=discord.ActivityType.playing)
         await client.change_presence(status=discord.Status.idle, activity=activity3)
-        activity4 = discord.Activity(name="You need 500 coins to create a server.",
+        activity4 = discord.Activity(name=f"You need {client.config['server_price']} coins to create a server.",
                                      type=discord.ActivityType.playing)
         await client.change_presence(status=discord.Status.idle, activity=activity4)
         await asyncio.sleep(20)
